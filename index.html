@@ -16,19 +16,83 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 	<!-- Local JS -->
 	<script type="text/javascript" src="scripts/app.js"></script>
+
+	<style type="text/css">
+		body, html{
+			width: 100%;
+		}
+		.center{
+			text-align: center;
+		}
+		.search-bar{
+			padding: 2em;
+		}
+		.card{
+			margin: 1em;
+		}
+	</style>
 </head>
 <body>
 <div class="container-fluid">
-	<div class="search-bar">
-		<input type="text" name="music-search" id="music-search">
-		<button id="search-btn">Search</button>
+	<div class="row">
+	<div class="search-bar col center">
+		<label for="music-search-artist">Artist Name:</label>
+		<input type="text" name="music-search-artist" id="music-search-artist">
+		<label for="music-search-title">Song Title Name:</label>
+		<input type="text" name="music-search-title" id="music-search-title">
+		<button id="search-btn" class="btn btn-info">Search</button>
 	</div>
-	<div class="side-bar">
-		
 	</div>
-	<div class="main-content">
+	<div class="row">
+	<div class="side-bar col-12 col-md-2">
+		<section>
+			<h3>Out of Ideas?</h3>
+			<p>See what others have searched for</p>
+			<div>Closer by Chainsmokers</div>
+			<div>​​rockstar by Post Malone</div>
+			<div>River by Eminem</div>
+			<div>Zombie by The Cranberries</div>
+		</section>
+	</div>
+	<div class="main-content col-12 col-md-10">
 		<!-- Cards go here -->
-
+		<div class="card">
+			<div class="card-header">
+				Results: Soundcloud
+			</div>
+			<div class="card-body">
+				Here is some content! 
+				<a href="#" target="_blank" class="btn btn-info">See more at soundcloud</a>
+			</div>
+		</div>
+		<div class="card">
+			<div class="card-header">
+				Results: Soundcloud
+			</div>
+			<div class="card-body">
+				Here is some content! 
+				<a href="#" target="_blank" class="btn btn-info">See more at soundcloud</a>
+			</div>
+		</div>
+		<div class="card">
+			<div class="card-header">
+				Results: Soundcloud
+			</div>
+			<div class="card-body">
+				Here is some content! 
+				<a href="#" target="_blank" class="btn btn-info">See more at soundcloud</a>
+			</div>
+		</div>
+		<div class="card">
+			<div class="card-header">
+				Results: Soundcloud
+			</div>
+			<div class="card-body">
+				Here is some content! 
+				<a href="#" target="_blank" class="btn btn-info">See more at soundcloud</a>
+			</div>
+		</div>
+	</div>
 	</div>
 </div>
 </body>
