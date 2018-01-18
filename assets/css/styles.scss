@@ -1,0 +1,53 @@
+$col-amber: #ffc107;
+$col-darkamber: #ffa000;
+$col-lightamber: #FFECB3;
+$col-darkgrey: #212121;
+$col-lightgrey: #757575;
+$col-offwhite: #BDBDBD; 
+
+
+@mixin sectionborder($d){
+	border-#{ $d }: 2px solid $col-amber;
+}
+
+
+html, body{
+	color: $col-darkgrey;
+	width: 100%;
+}
+
+.center{
+	text-align: center;
+}
+
+.search-bar{
+	padding: 2em;
+	background: $col-lightamber;
+	@include sectionborder(bottom);
+}
+
+.side-bar{
+	padding: .65em;
+	@include sectionborder(right); 
+}
+
+.card{
+	margin: 1em;
+}
+
+.btn-info{
+	outline: none !important;
+	box-shadow: none !important;
+	color: $col-darkgrey;
+	background: none;
+	border: 2px solid $col-amber;
+
+	&:hover{
+		color: $col-lightamber;
+		background-color: $col-darkamber;
+		border-color: $col-darkamber;
+	}
+	&:active{
+		text-transform: scale(.9);
+	}
+}
