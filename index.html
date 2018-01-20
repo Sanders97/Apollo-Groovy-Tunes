@@ -81,14 +81,24 @@
 	</div>
 	</div>
 </div>
-<style type="text/css">
-	.drop-zone{
-		border: 1.5px dotted grey;
-		min-height: 25%;
-	}
-</style>
 <script type="text/javascript">
 	$('.main-content').sortable({handle: '.card-header', placeholder: 'drop-zone' });
+
+	$(document).ready(function(){
+		var s = localStorage.getItem('recentsearches');
+		if(s){
+			s = s.split(',').forEach(function(item){
+				$('.search-history').append('<a href="#" class="past-search">' + i + '</a>');
+			});
+		}
+	});
+
+	$('.side-bar').on('click', '.past-search', function(){
+		var [pastTitle, pastArtist] = $(this).text().split(' by ');
+		$('.music-search-artist').val(pastArtist);
+		$('.music-search-title').val(pastTitle);
+		$('#search-btn').trigger('click');
+	});
 </script>
 </body>
 </html>

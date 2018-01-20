@@ -30,4 +30,18 @@ html, body {
   .btn-info:active {
     text-transform: scale(0.9); }
 
+input {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0 .3em;
+  margin: 0 .3em;
+  border-bottom: 2px solid #b37000; }
+  input:focus {
+    border-bottom: 2px solid #ffc107; }
+
+.drop-zone {
+  border: 1.5px dotted #212121;
+  min-height: 25%; }
+
 /*# sourceMappingURL=styles.css.map */

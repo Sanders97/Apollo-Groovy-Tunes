@@ -6,8 +6,8 @@ $col-lightgrey: #757575;
 $col-offwhite: #BDBDBD; 
 
 
-@mixin sectionborder($d){
-	border-#{ $d }: 2px solid $col-amber;
+@mixin sectionborder($d, $c: $col-amber){
+	border-#{ $d }: 2px solid $c;
 }
 
 
@@ -50,4 +50,22 @@ html, body{
 	&:active{
 		text-transform: scale(.9);
 	}
+}
+
+input{
+	background: none;
+	border: none;
+	box-shadow: none;
+	padding: 0 .3em;
+	margin: 0 .3em;
+	@include sectionborder(bottom, darken($col-darkamber, 15%));
+
+	&:focus{
+		@include sectionborder(bottom, $col-amber);
+	}
+}
+
+.drop-zone{
+	border: 1.5px dotted $col-darkgrey;
+	min-height: 25%;
 }
