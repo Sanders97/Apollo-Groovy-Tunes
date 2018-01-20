@@ -1,66 +1,53 @@
-const client = new stitch.StitchClient('musicsearch-ojgsa'),
-	db = client.service('mongodb', 'mongodb-atlas').db('searchterms');
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyC7GvTxM-Pr57evypfZkONFOusmfLmAP2s",
+  authDomain: "musicsear-b00a0.firebaseapp.com",
+  databaseURL: "https://musicsear-b00a0.firebaseio.com",
+  projectId: "musicsear-b00a0",
+  storageBucket: "musicsear-b00a0.appspot.com",
+  messagingSenderId: "749018516467"
+};
+firebase.initializeApp(config);
+var database = firebase.database();
 
-client.login();
-
-$('#search-btn').on('click', function(){
-	var userSearchName = $('#music-search-artist').val(),
-		userSearchTitle = $('#music-search-title').val(),
-		documentSearchName = new Record(userSearchName, 'artist', [userSearchTitle], 1),
-		documentSearchTitle = new Record(userSearchTitle, 'title', [userSearchName], 1);
-
-	addToMongo(documentSearchName).then(function(){incrementSearch(documentSearchName);});
-	addToMongo(documentSearchTitle).then(function(){incrementSearch(documentSearchName);});
-
-	/*
-	// Insert Artist Seaarch
-	db.collection('searchterms').updateOne(
-		{"term": userSearchName, "type": "artist"}, 
-		{"$setOnInsert": documentSearchName}, 
-		{"upsert": true}
-		).then(function(data){
-			db.collection('searchterms').updateOne({"term": userSearchName, "type": "artist"}, {"$addToSet": {"relatedto" : userSearchTitle}});
-		}).then(fuction(){});
-	// Insert Title Search
-	db.collection('searchterms').updateOne(
-		{"term": userSearchTitle, "type": "title"}, 
-		{"$setOnInsert": documentSearchTitle}, 
-		{"upsert": true}
-		).then(function(data){
-			db.collection('searchterms').updateOne({"term": userSearchTitle, "type": "title"}, {"$addToSet": {"relatedto" : userSearchName}});
-		});*/
+$(document).ready(function(){
+  database.ref().orderBy.once('value', function(data){
+    data = data.val();
+  });
 });
 
-function addToMongo(rec){
-	db.collection('searchterms').updateOne(
-		{"term": rec.term, "type": rec.type}, 
-		{"$setOnInsert": rec}, 
-		{"upsert": true}
-	).then(function(data){
-		console.log(data);
-		db.collection('searchterms').updateOne(
-			{"term": rec.term, "type": rec.type}, 
-			// adding to a nested set... we need to add to set 'relatedto' NOT 'relatedto/array'
-			{"$addToSet": {"relatedto" : rec.relatedto}}
-		);
+$('#search-btn').on('click', function(){
+  var q = new UserQuery(
+    $('#music-search-artist').val(), 
+    $('#music-search-title').val()
+  );
 
-		//then add to "times" to be += 1
-	});
-}
+  function UserQuery(artist, title, count){
+    this.artist = artist;
+    this.title = title;
+    this.count = count || 0;
+    this.artistPath = 'artist/' + this.artist;
+    this.artistTitlePath = this.artistPath + '/titles/' + this.title;
+    this.titePath = 'title/' + this.title;
+    this.titleArtistPath = this.titePath + '/artists/' + this.artists;
+  }
 
-function incrementSearch(rec){
-	var t = db.collection('searchterms').find(
-		{"term": rec.term, "type": rec.type},
-		{"times": true}
-		) || 0;
-	db.collection('searchterms').updateOne(
-		{"term": rec.term, "type": rec.type},
-		{"$set": {"times": t + 1}}
-		);
-}
+  // Update Firebase
+  // If a count of previous artist/title searches exists, pull that in
+  // Upsert the artist and title in db 
+  // Upsert the artist > titles and title > artists in db
+  database.ref( q.artistTitlePath ).once('value', function(data){
+    q.count =  data.val() ? data.val().titles[q.title] + 1 : 1;
+  }).then(function(){
+    database.ref().update({
+      [q.titePath]: q.title,
+      [q.artistPath]: q.artist
+    });
+  }).then(function(){
+    database.ref().update({
+      [q.titleArtistPath]: q.artist,
+      [q.artistTitlePath]: q.title
+    });
+  });
 
-function Record(term, type, relatedto){
-	this.term = term;
-	this.type = type;
-	this.relatedto = relatedto;
-}
+});
