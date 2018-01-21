@@ -1,6 +1,9 @@
 html, body {
   color: #212121;
-  width: 100%; }
+  width: 100%;
+  height: 100%; }
+  html .container-fluid, html .row:nth-child(2), body .container-fluid, body .row:nth-child(2) {
+    height: 100%; }
 
 .center {
   text-align: center; }
@@ -23,12 +26,19 @@ html, body {
   color: #212121;
   background: none;
   border: 2px solid #ffc107; }
-  .btn-info:hover {
+  .btn-info:hover, .btn-info:active, .btn-info:focus, .btn-info:not([disabled]):not(.disabled).active, .btn-info:not([disabled]):not(.disabled):active {
     color: #FFECB3;
     background-color: #ffa000;
     border-color: #ffa000; }
   .btn-info:active {
-    text-transform: scale(0.9); }
+    transform: scale(0.9); }
+
+a {
+  color: #ffa000;
+  transition: all 0.5s; }
+  a:hover {
+    color: #b37000;
+    text-decoration: none; }
 
 input {
   background: none;
@@ -36,12 +46,19 @@ input {
   box-shadow: none;
   padding: 0 .3em;
   margin: 0 .3em;
-  border-bottom: 2px solid #b37000; }
+  border-bottom: 2px solid #ffc107; }
   input:focus {
-    border-bottom: 2px solid #ffc107; }
+    border-bottom: 2px solid #b37000; }
+  input:invalid {
+    color: #FF5252; }
 
 .drop-zone {
   border: 1.5px dotted #212121;
+  padding: 2em;
+  margin: 2em;
   min-height: 25%; }
+
+#search-trends ol {
+  list-style: none; }
 
 /*# sourceMappingURL=styles.css.map */

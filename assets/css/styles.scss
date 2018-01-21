@@ -4,7 +4,7 @@ $col-lightamber: #FFECB3;
 $col-darkgrey: #212121;
 $col-lightgrey: #757575;
 $col-offwhite: #BDBDBD; 
-
+$col-error: #FF5252;
 
 @mixin sectionborder($d, $c: $col-amber){
 	border-#{ $d }: 2px solid $c;
@@ -14,6 +14,11 @@ $col-offwhite: #BDBDBD;
 html, body{
 	color: $col-darkgrey;
 	width: 100%;
+	height: 100%;
+
+	.container-fluid, .row:nth-child(2){
+		height: 100%;
+	}
 }
 
 .center{
@@ -42,13 +47,26 @@ html, body{
 	background: none;
 	border: 2px solid $col-amber;
 
-	&:hover{
+	&:hover, 
+	&:active,
+	&:focus,
+	&:not([disabled]):not(.disabled).active, 
+	&:not([disabled]):not(.disabled):active{
 		color: $col-lightamber;
 		background-color: $col-darkamber;
 		border-color: $col-darkamber;
 	}
 	&:active{
-		text-transform: scale(.9);
+		transform: scale(.9);
+	}
+}
+
+a{
+	color: $col-darkamber;
+	transition: all 0.5s;
+	&:hover{
+		color: darken($col-darkamber, 15%);
+		text-decoration: none;
 	}
 }
 
@@ -58,14 +76,26 @@ input{
 	box-shadow: none;
 	padding: 0 .3em;
 	margin: 0 .3em;
-	@include sectionborder(bottom, darken($col-darkamber, 15%));
+	@include sectionborder(bottom, $col-amber);
 
 	&:focus{
-		@include sectionborder(bottom, $col-amber);
+		@include sectionborder(bottom, darken($col-darkamber, 15%));
+	}
+
+	&:invalid{
+		color: $col-error;
 	}
 }
 
 .drop-zone{
 	border: 1.5px dotted $col-darkgrey;
+	padding: 2em;
+	margin: 2em;
 	min-height: 25%;
+}
+
+#search-trends{
+	ol{
+		list-style: none;
+	}
 }
