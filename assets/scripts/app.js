@@ -2,8 +2,67 @@
 Function to get AJAX results for a video
 Parameters: name a user searched on and title a user searched on
 */
-function getVideo(searchName, searchTitle ){
+//variable used to create unique ul element for for cards
+var cardCount = 0;
 
+$("#search-btn").click(function(e){
+	e.preventDefault();
+	executeSearch();
+});
+
+function getVideo(userSearchName, searchTitle){
+	
+		var q = userSearchName + " " + searchTitle + " Lyrics";
+
+		addVideoCard(searchTitle); 
+		
+		// Run GET Request on API
+		$.get(
+			"https://www.googleapis.com/youtube/v3/search",{
+				part: 'snippet, id',
+				q: q,
+				type:'video',
+				maxResults: 3,
+				videoSyndicated: true,
+				videoEmbeddable: true,
+				videoLicense: 'creativeCommon',
+				key: 'AIzaSyBEw_OnLrWKAKGIzxb2ee5WtfnRR0md67Q'},
+				function(data){
+					
+					// Log Data
+					console.log(data);
+					
+					$.each(data.items, function(i, item){
+						// Get Output
+						var output = getOutput(item);
+						//set the new videos to the correct card
+						//by referencing the card Id created for the card
+						$('#card' + cardCount).append(output);
+					});
+				}
+		);
+}
+
+// Build Output
+function getOutput(item){
+	var videoId = item.id.videoId;
+	var title = item.snippet.title;
+	var channelTitle = item.snippet.channelTitle;
+	var videoDate = item.snippet.publishedAt;
+	
+	// Build Output String
+	var output = '<li>' +
+	'<div>' +
+	'<iframe width="360" height="200" src="https://www.youtube.com/embed/' + videoId + '?rel=0" frameborder="0"; encrypted-media" allowfullscreen></iframe>' +
+	'</div>' +
+	'<div>' +
+	'<small>By <span>'+channelTitle+'</span> on '+videoDate+'</small>' +
+	'</div>' +
+	'</li>' +
+	'<div></div>' +
+	'';
+	
+	return output;
 }
 
 /*
@@ -30,6 +89,7 @@ Function to react to user click
 // Calls functions to execute ajax calls (which will append cards as promise results)
 // Adds search criteria to user's past search and to db for trending searches 
 */
+
 function executeSearch(){
 	var userSearchName = $('#music-search-artist').val(),
 		userSearchTitle = $('#music-search-title').val();
@@ -37,10 +97,11 @@ function executeSearch(){
 	if( !userSearchName || !userSearchTitle ){
 		return ; // do not do anything if a field is blank
 	}
-	$('.main-content').empty();
-
-	// getVideo(userSearchName, userSearchTitle).then(function(data){
-	//	addCard(data.heading ... etc );
+	//$('.main-content').empty();
+	getVideo(userSearchName,userSearchTitle);
+	
+	//getVideo(userSearchName, userSearchTitle).then(function(data){
+	//	addCard();
 	//});
 	// getLyrics(userSearchName, userSearchTitle).then(function(data){
 	//	addCard(data.heading ... etc );
@@ -67,4 +128,21 @@ function addCard(cardHeading, cardContents, cardButtonText, cardLinkTo){
 	v += '</div>';
 
 	$('.main-content').append(v);
+}
+
+function addVideoCard(cardHeading){
+
+	//We need an id for the ul so we can add the list items
+	//for videos and lyrics to the correct card body
+	cardCount++;
+
+	var v = '<div class="card">';
+	v += '<div class="card-header">Results: ' + cardHeading + '</div>';
+	v += '<div class="card-body">'
+	v += '<ul id="card' + cardCount + '">'
+	v += '</div>';
+	v += '</div>';
+
+	$('.main-content').append(v);
+	
 }
