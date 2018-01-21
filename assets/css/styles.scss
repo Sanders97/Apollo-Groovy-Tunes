@@ -48,6 +48,13 @@ html, body{
 
 .card{
 	margin: 1em;
+
+	.card-body li{
+		padding:10px 0;
+		border-bottom:1px #ccc dotted;
+		list-style:none;
+		overflow:auto;
+	}
 }
 
 .btn-info{
@@ -104,7 +111,8 @@ input{
 	min-height: 25%;
 }
 
-#search-trends{
+#search-trends, 
+#search-top{
 	ol{
 		list-style: none;
 		padding-left: 0px;
