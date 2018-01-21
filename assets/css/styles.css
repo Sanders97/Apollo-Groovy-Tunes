@@ -24,6 +24,13 @@ html, body {
 .card {
   margin: 1em; }
 
+.card-body li{
+    padding:10px 0;
+    border-bottom:1px #ccc dotted;
+    list-style:none;
+    overflow:auto;
+  }
+
 .btn-info {
   outline: none !important;
   box-shadow: none !important;
