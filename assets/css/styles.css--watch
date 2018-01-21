@@ -6,7 +6,7 @@ html, body {
   height: 100%; }
   html .container-fluid, html .row:nth-child(2), body .container-fluid, body .row:nth-child(2) {
     height: 100%; }
-  html h1, html h2, html h3, html h4, html h5, html h6, html span, html label, body h1, body h2, body h3, body h4, body h5, body h6, body span, body label {
+  html h1, html h2, html h3, html h4, html h5, html h6, html span, body h1, body h2, body h3, body h4, body h5, body h6, body span {
     font-family: "Roboto", sans-serif; }
 
 .center {
@@ -63,7 +63,6 @@ input {
   min-height: 25%; }
 
 #search-trends ol {
-  list-style: none;
-  padding-left: 0px; }
+  list-style: none; }
 
-/*# sourceMappingURL=styles.css.map */
+/*# sourceMappingURL=styles.css--watch.map */

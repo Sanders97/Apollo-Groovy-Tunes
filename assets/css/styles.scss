@@ -6,6 +6,11 @@ $col-lightgrey: #757575;
 $col-offwhite: #BDBDBD; 
 $col-error: #FF5252;
 
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans|Roboto:700');
+
+$font-body: 'Nunito Sans', sans-serif;
+$font-headings: 'Roboto', sans-serif;
+
 @mixin sectionborder($d, $c: $col-amber){
 	border-#{ $d }: 2px solid $c;
 }
@@ -13,11 +18,16 @@ $col-error: #FF5252;
 
 html, body{
 	color: $col-darkgrey;
+	font-family: $font-body;
 	width: 100%;
 	height: 100%;
 
 	.container-fluid, .row:nth-child(2){
 		height: 100%;
+	}
+
+	h1, h2, h3, h4, h5, h6, span, label{
+		font-family: $font-headings;
 	}
 }
 
@@ -97,5 +107,6 @@ input{
 #search-trends{
 	ol{
 		list-style: none;
+		padding-left: 0px;
 	}
 }
