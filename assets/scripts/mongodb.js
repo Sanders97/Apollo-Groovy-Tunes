@@ -33,6 +33,7 @@ String.prototype.toWordCase = function(){
 // and show them within the view 
 $(document).ready(()=> getTopN());
 function getTopN(n = 5){
+	client.login();
 	db.collection('searchterms').find({}).sort({"count": -1}).limit(n).execute()
 	.then(function(data){
 		let t = $('<ol>');
