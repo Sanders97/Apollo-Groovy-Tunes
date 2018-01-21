@@ -10,15 +10,6 @@
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 	<!-- Local CSS -->
 	<link rel="stylesheet" type="text/css" href="assets/css/styles.css">
-	<!-- JQuery -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<!-- JQuery UI -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-	<!-- Mongo Stitch -->
-	<script src="https://s3.amazonaws.com/stitch-sdks/js/library/v2/stable/stitch.min.js"></script>
-	<!-- Local JS -->
-	<script type="text/javascript" src="assets/scripts/app.js"></script>
-	<script type="text/javascript" src="assets/scripts/db.js"></script>
 
 </head>
 <body>
@@ -26,9 +17,9 @@
 	<div class="row">
 	<div class="search-bar col center">
 		<label for="music-search-artist">Artist Name:</label>
-		<input type="text" name="music-search-artist" id="music-search-artist">
+		<input type="text" name="music-search-artist" id="music-search-artist" pattern="(\w|\s)+">
 		<label for="music-search-title">Song Title Name:</label>
-		<input type="text" name="music-search-title" id="music-search-title">
+		<input type="text" name="music-search-title" id="music-search-title" pattern="(\w|\s)+">
 		<button id="search-btn" class="btn btn-info">Search</button>
 	</div>
 	</div>
@@ -39,22 +30,6 @@
 			<p>See what others have searched for</p>
 			<hr>
 			<div id="search-trends">
-				<div>Closer by Chainsmokers</div>
-				<div>​​rockstar by Post Malone</div>
-				<div>River by Eminem</div>
-				<div>Zombie by The Cranberries</div>
-			</div>
-		</section>
-		<br>
-		<section>
-			<h3>Your Latest Searches</h3>
-			<p>Remember that song? We do</p>
-			<hr>
-			<div id="search-history">
-				<div>Closer by Chainsmokers</div>
-				<div>​​rockstar by Post Malone</div>
-				<div>River by Eminem</div>
-				<div>Zombie by The Cranberries</div>
 			</div>
 		</section>
 	</div>
@@ -81,6 +56,16 @@
 	</div>
 	</div>
 </div>
+	<!-- JQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!-- JQuery UI -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<!-- Mongo Stitch -->
+	<script src="https://s3.amazonaws.com/stitch-sdks/js/library/v2/stable/stitch.min.js"></script>
+	<!-- Local JS -->
+	<script type="text/javascript" src="assets/scripts/app.js"></script>
+	<script type="text/javascript" src="assets/scripts/mongodb.js"></script>
+
 <script type="text/javascript">
 	$('.main-content').sortable({handle: '.card-header', placeholder: 'drop-zone' });
 
@@ -93,12 +78,7 @@
 		}
 	});
 
-	$('.side-bar').on('click', '.past-search', function(){
-		var [pastTitle, pastArtist] = $(this).text().split(' by ');
-		$('.music-search-artist').val(pastArtist);
-		$('.music-search-title').val(pastTitle);
-		$('#search-btn').trigger('click');
-	});
+
 </script>
 </body>
 </html>
