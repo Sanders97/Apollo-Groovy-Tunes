@@ -22,7 +22,7 @@ function getVideo(userSearchName, searchTitle){
 				part: 'snippet, id',
 				q: q,
 				type:'video',
-				maxResults: 3,
+				maxResults: 5,
 				videoSyndicated: true,
 				videoEmbeddable: true,
 				videoLicense: 'creativeCommon',
@@ -70,7 +70,35 @@ Function to get AJAX results for lyrics
 Parameters: name a user searched on and song title a user searched on
 */
 function getLyrics(searchName, searchTitle ){
-
+	$.ajax({
+		type: "GET",
+		data: {
+			apikey:"cf26b189ccd280c650cdcbc166f3c71d",
+			q_track:searchName,//"back to december",
+			q_artist:searchTitle,//"taylor%20swift",
+			f_has_lyrics: 1,
+			format:"jsonp",
+			callback:"jsonp_callback"
+		},
+		url: "http://api.musixmatch.com/ws/1.1/matcher.lyrics.get",
+		dataType: "jsonp",
+		jsonpCallback: 'jsonp_callback',
+		contentType: 'application/json',
+		success: function(data) {
+			console.log(data);
+			var lyricsTitle = searchTitle + " Lyrics";
+			var lyricsHeading = $('<h4></h4>').text(lyricsTitle);
+			var lyrics = data.message.body.lyrics.lyrics_body;
+			$('#card' + cardCount).prepend(lyrics);
+			$('#card' + cardCount).prepend(lyricsHeading);
+			
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			console.log(jqXHR);
+			console.log(textStatus);
+			console.log(errorThrown);
+		}    
+	  });
 }
 
 /*
@@ -99,6 +127,8 @@ function executeSearch(){
 	}
 	//$('.main-content').empty();
 	getVideo(userSearchName,userSearchTitle);
+
+	getLyrics(userSearchName,userSearchTitle);
 	
 	//getVideo(userSearchName, userSearchTitle).then(function(data){
 	//	addCard();
@@ -137,12 +167,12 @@ function addVideoCard(cardHeading){
 	cardCount++;
 
 	var v = '<div class="card">';
-	v += '<div class="card-header">Results: ' + cardHeading + '</div>';
+	v += '<div class="card-header">' + cardHeading + '</div>';
 	v += '<div class="card-body">'
 	v += '<ul id="card' + cardCount + '">'
 	v += '</div>';
 	v += '</div>';
 
-	$('.main-content').append(v);
+	$('.main-content').prepend(v);
 	
 }

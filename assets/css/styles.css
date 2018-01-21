@@ -29,6 +29,8 @@ html, body {
     border-bottom:1px #ccc dotted;
     list-style:none;
     overflow:auto;
+    float: left;
+    margin-right: 4px;
   }
 
 .btn-info {
