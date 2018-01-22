@@ -47,21 +47,6 @@
 	<!-- Local JS -->
 	<script type="text/javascript" src="assets/scripts/app.js"></script>
 	<script type="text/javascript" src="assets/scripts/mongodb.js"></script>
-	<script type="text/javascript" src="assets/scripts/trending.js"></script>
 
-<script type="text/javascript">
-	$('.main-content').sortable({handle: '.card-header', placeholder: 'drop-zone' });
-
-	$(document).ready(function(){
-		var s = localStorage.getItem('recentsearches');
-		if(s){
-			s = s.split(',').forEach(function(item){
-				$('.search-history').append('<a href="#" class="past-search">' + i + '</a>');
-			});
-		}
-	});
-
-
-</script>
 </body>
 </html>
