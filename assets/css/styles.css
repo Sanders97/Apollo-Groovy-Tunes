@@ -23,15 +23,15 @@ html, body {
 
 .card {
   margin: 1em; }
-
-.card-body li{
-    padding:10px 0;
-    border-bottom:1px #ccc dotted;
-    list-style:none;
-    overflow:auto;
-    float: left;
-    margin-right: 4px;
-  }
+  .card .card-videos ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; }
+  .card .card-videos li {
+    padding: 1em .1 em;
+    border-bottom: 1px #ccc dotted;
+    list-style: none;
+    overflow: auto; }
 
 .btn-info {
   outline: none !important;
