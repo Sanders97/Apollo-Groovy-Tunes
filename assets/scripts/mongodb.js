@@ -68,15 +68,15 @@ $(document).ready(function(){
 	$('#search-trends').after(f);
 
 	getLastFM(5);
-});
-
-// Function to execute a search on "top song" click
-// Adds a listener to the trending searches to execute
-// a query when one is clicked 
-$('#search-trends, #search-top').on('click', 'a', function(){
-	$('#music-search-artist').val( $(this).attr('data-artist') );
-	$('#music-search-title').val( $(this).attr('data-title') );
-	$('#search-btn').trigger('click');
+	
+	// Function to execute a search on "top song" click
+	// Adds a listener to the trending searches to execute
+	// a query when one is clicked 
+	$('#search-trends, #search-top').on('click', 'a', function(){
+		$('#music-search-artist').val( $(this).attr('data-artist') );
+		$('#music-search-title').val( $(this).attr('data-title') );
+		$('#search-btn').trigger('click');
+	});
 });
 
 // Function to store query to database
