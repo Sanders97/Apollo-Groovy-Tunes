@@ -88,9 +88,9 @@ function getLyrics(searchName, searchTitle ){
 			console.log(data);
 			var lyricsTitle = searchTitle + " Lyrics";
 			var lyricsHeading = $('<h4></h4>').text(lyricsTitle);
-			var lyrics = data.message.body.lyrics.lyrics_body;
-			$('#card' + cardCount).prepend(lyrics);
-			$('#card' + cardCount).prepend(lyricsHeading);
+			var lyrics = (data.message.body.lyrics.lyrics_body).replace(' ******* This Lyrics is NOT for Commercial use *******','');
+			$('#card' + cardCount).before('<div>' + lyricsHeading '</div>');
+			$('#card' + cardCount).before(lyrics);
 			
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
@@ -100,16 +100,6 @@ function getLyrics(searchName, searchTitle ){
 		}    
 	  });
 }
-
-/*
-Function to get AJAX results for embedable widget 
-Parameters: name a user searched on and song title a user searched on
-*/
-function getWidget(searchName, searchTitle ){
-
-}
-
-
 /*
 Function to react to user click
 // Checks that input exists 
@@ -130,17 +120,6 @@ function executeSearch(){
 
 	getLyrics(userSearchName,userSearchTitle);
 	
-	//getVideo(userSearchName, userSearchTitle).then(function(data){
-	//	addCard();
-	//});
-	// getLyrics(userSearchName, userSearchTitle).then(function(data){
-	//	addCard(data.heading ... etc );
-	//});
-	// getWidget(userSearchName, userSearchTitle).then(function(data){
-	//	addCard(data.heading ... etc );
-	//});
-	// etc... as we add more for tickets/events
-
 	$('#music-search-title, #music-search-artist').val('');
 }
 
@@ -149,16 +128,6 @@ function executeSearch(){
 Function to add a new card 
 Parameters: card heading, body content (html), link text and link source
 */
-
-function addCard(cardHeading, cardContents, cardButtonText, cardLinkTo){
-	var v = '<div class="card">';
-	v += '<div class="card-header">Results: ' + cardHeading + '</div>';
-	v += '<div class="card-body">' + cardContents + '</div>';
-	v += '<a href="'+ cardLinkTo +'" target="_blank" class="btn btn-info">' + cardButtonText + '</a>';
-	v += '</div>';
-
-	$('.main-content').append(v);
-}
 
 function addVideoCard(cardHeading){
 
@@ -169,7 +138,7 @@ function addVideoCard(cardHeading){
 	var v = '<div class="card">';
 	v += '<div class="card-header">' + cardHeading + '</div>';
 	v += '<div class="card-body">'
-	v += '<ul id="card' + cardCount + '">'
+	v += '<ul class="card-videos" id="card' + cardCount + '">'
 	v += '</div>';
 	v += '</div>';
 
