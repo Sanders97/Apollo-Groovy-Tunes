@@ -57,7 +57,7 @@ function getTopN(n = 5){
 // Function to show top songs 
 // When window loads
 $(document).ready(function(){
-	$('.main-content').sortable({handle: '.card-header', placeholder: 'drop-zone' });
+	// $('.main-content').sortable({handle: '.card-header', placeholder: 'drop-zone' });
 	
 	getTopN();
 
@@ -68,7 +68,7 @@ $(document).ready(function(){
 	$('#search-trends').after(f);
 
 	getLastFM(5);
-	
+
 	// Function to execute a search on "top song" click
 	// Adds a listener to the trending searches to execute
 	// a query when one is clicked 

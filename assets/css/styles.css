@@ -23,15 +23,16 @@ html, body {
 
 .card {
   margin: 1em; }
-  .card .card-videos ul {
+  .card .card-videos {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between; }
-  .card .card-videos li {
-    padding: 1em .1 em;
-    border-bottom: 1px #ccc dotted;
-    list-style: none;
-    overflow: auto; }
+    justify-content: space-around;
+    padding: 0; }
+    .card .card-videos li {
+      padding: 1em;
+      border-bottom: 1px #ccc dotted;
+      list-style: none;
+      overflow: auto; }
 
 .btn-info {
   outline: none !important;
@@ -69,7 +70,9 @@ input {
   border: 1.5px dotted #212121;
   padding: 2em;
   margin: 2em;
-  min-height: 25%; }
+  min-height: 25%;
+  width: 200px;
+  background-color: #757575; }
 
 #search-trends ol,
 #search-top ol {

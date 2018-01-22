@@ -22,7 +22,7 @@ function getVideo(userSearchName, searchTitle){
 				part: 'snippet, id',
 				q: q,
 				type:'video',
-				maxResults: 5,
+				maxResults: 4,
 				videoSyndicated: true,
 				videoEmbeddable: true,
 				videoLicense: 'creativeCommon',
@@ -38,6 +38,8 @@ function getVideo(userSearchName, searchTitle){
 						//set the new videos to the correct card
 						//by referencing the card Id created for the card
 						$('#card' + cardCount).append(output);
+						$('.card-videos').sortable({handle: '.video-title', placeholder: 'drop-zone'});
+						$('.card-videos').disableSelection();
 					});
 				}
 		);
@@ -56,11 +58,9 @@ function getOutput(item){
 	'<iframe width="360" height="200" src="https://www.youtube.com/embed/' + videoId + '?rel=0" frameborder="0"; encrypted-media" allowfullscreen></iframe>' +
 	'</div>' +
 	'<div>' +
-	'<small>By <span>'+channelTitle+'</span> on '+videoDate+'</small>' +
+	'<small class="video-title">By <span>'+channelTitle+'</span> on '+videoDate+'</small>' +
 	'</div>' +
-	'</li>' +
-	'<div></div>' +
-	'';
+	'</li>';
 	
 	return output;
 }

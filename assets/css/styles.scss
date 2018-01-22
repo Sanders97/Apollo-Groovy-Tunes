@@ -50,14 +50,13 @@ html, body{
 	margin: 1em;
 
 	.card-videos{
-		ul{
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: space-between;
-		} 
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-around;
+		padding: 0;
 
 		li{
-			padding: 1em .1 em;
+			padding: 1em;
 			border-bottom:1px #ccc dotted;
 			list-style:none;
 			overflow:auto;
@@ -118,6 +117,8 @@ input{
 	padding: 2em;
 	margin: 2em;
 	min-height: 25%;
+	width: 200px;
+	background-color: $col-lightgrey;
 }
 
 #search-trends, 
