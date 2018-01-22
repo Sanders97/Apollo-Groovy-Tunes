@@ -89,7 +89,7 @@ function getLyrics(searchName, searchTitle ){
 			var lyricsTitle = searchTitle + " Lyrics";
 			var lyricsHeading = $('<h4></h4>').text(lyricsTitle);
 			var lyrics = (data.message.body.lyrics.lyrics_body).replace(' ******* This Lyrics is NOT for Commercial use *******','');
-			$('#card' + cardCount).before('<div>' + lyricsHeading '</div>');
+			$('#card' + cardCount).before('<div class="card-lyrics">' + lyricsHeading '</div>');
 			$('#card' + cardCount).before(lyrics);
 			
 		},
