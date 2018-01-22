@@ -87,10 +87,10 @@ function getLyrics(searchName, searchTitle ){
 		success: function(data) {
 			console.log(data);
 			var lyricsTitle = searchTitle + " Lyrics";
-			var lyricsHeading = $('<h4></h4>').text(lyricsTitle);
-			var lyrics = (data.message.body.lyrics.lyrics_body).replace(' ******* This Lyrics is NOT for Commercial use *******','');
-			$('#card' + cardCount).before('<div class="card-lyrics">' + lyricsHeading + '</div>');
-			$('#card' + cardCount).before(lyrics);
+			var lyricsHeading = $('<h4>' + lyricsTitle + '</h4>');
+			var lyrics = (data.message.body.lyrics.lyrics_body).replace('******* This Lyrics is NOT for Commercial use *******','');
+			$('#card' + cardCount).before(lyricsHeading);
+			$('#card' + cardCount).before('<div class="card-lyrics">' + lyrics + '</div>');
 			
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
