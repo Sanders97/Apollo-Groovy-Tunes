@@ -6,6 +6,11 @@ html, body {
   height: 100%; }
   html .container-fluid, html .row:nth-child(2), body .container-fluid, body .row:nth-child(2) {
     height: 100%; }
+  html .main-content, body .main-content {
+    background: url("../images/bg2-2.png"), url("../images/bg1-1.png");
+    background-position-x: left, right;
+    background-size: contain, contain;
+    background-repeat: repeat-y, repeat-y; }
   html h1, html h2, html h3, html h4, html h5, html h6, html span, html label, body h1, body h2, body h3, body h4, body h5, body h6, body span, body label {
     font-family: "Roboto", sans-serif; }
 
@@ -22,7 +27,8 @@ html, body {
   border-right: 2px solid #ffc107; }
 
 .card {
-  margin: 1em; }
+  margin: 1em;
+  opacity: .95; }
   .card .card-videos {
     display: flex;
     flex-wrap: wrap;

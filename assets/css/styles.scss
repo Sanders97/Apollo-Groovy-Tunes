@@ -26,6 +26,14 @@ html, body{
 		height: 100%;
 	}
 
+	.main-content{
+		background: url('../images/bg2-2.png'), url('../images/bg1-1.png');
+		background-position-x: left, right;
+		background-size: contain, contain;
+		background-repeat: repeat-y, repeat-y;
+
+	}
+
 	h1, h2, h3, h4, h5, h6, span, label{
 		font-family: $font-headings;
 	}
@@ -48,6 +56,7 @@ html, body{
 
 .card{
 	margin: 1em;
+	opacity: .95;
 
 	.card-videos{
 		display: flex;
