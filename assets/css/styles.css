@@ -1,18 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans|Roboto:700");
 html, body {
   color: #212121;
-  font-family: "Nunito Sans", sans-serif;
-  width: 100%;
-  height: 100%; }
-  html .container-fluid, html .row:nth-child(2), body .container-fluid, body .row:nth-child(2) {
-    height: 100%; }
-  html .main-content, body .main-content {
-    background: url("../images/bg2-2.png"), url("../images/bg1-1.png");
-    background-position-x: left, right;
-    background-size: contain, contain;
-    background-repeat: repeat-y, repeat-y; }
-  html h1, html h2, html h3, html h4, html h5, html h6, html span, html label, body h1, body h2, body h3, body h4, body h5, body h6, body span, body label {
-    font-family: "Roboto", sans-serif; }
+  width: 100%; }
 
 .center {
   text-align: center; }
@@ -27,18 +16,7 @@ html, body {
   border-right: 2px solid #ffc107; }
 
 .card {
-  margin: 1em;
-  opacity: .95; }
-  .card .card-videos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 0; }
-    .card .card-videos li {
-      padding: 1em;
-      border-bottom: 1px #ccc dotted;
-      list-style: none;
-      overflow: auto; }
+  margin: 1em; }
 
 .btn-info {
   outline: none !important;
@@ -46,43 +24,30 @@ html, body {
   color: #212121;
   background: none;
   border: 2px solid #ffc107; }
-  .btn-info:hover, .btn-info:active, .btn-info:focus, .btn-info:not([disabled]):not(.disabled).active, .btn-info:not([disabled]):not(.disabled):active {
+  .btn-info:hover {
     color: #FFECB3;
     background-color: #ffa000;
     border-color: #ffa000; }
   .btn-info:active {
-    transform: scale(0.9); }
+    text-transform: scale(0.9); }
 
-a {
-  color: #ffa000;
-  transition: all 0.5s; }
-  a:hover {
-    color: #b37000;
-    text-decoration: none; }
+    .side-bar{
+  background-color: orange;
+}
 
-input {
-  background: none;
-  border: none;
-  box-shadow: none;
-  padding: 0 .3em;
-  margin: 0 .3em;
-  border-bottom: 2px solid #ffc107; }
-  input:focus {
-    border-bottom: 2px solid #b37000; }
-  input:invalid {
-    color: #FF5252; }
+  .main-content{
+  background-color:  lightgrey;
+}
 
-.drop-zone {
-  border: 1.5px dotted #212121;
-  padding: 2em;
-  margin: 2em;
-  min-height: 25%;
-  width: 200px;
-  background-color: #757575; }
+  .search-bar{
+    background-color: navy
+  }
 
-#search-trends ol,
-#search-top ol {
-  list-style: none;
-  padding-left: 0px; }
+  label{
+    color:white;
+  }
 
+  #search-btn{
+    color: white;
+  }
 /*# sourceMappingURL=styles.css.map */
