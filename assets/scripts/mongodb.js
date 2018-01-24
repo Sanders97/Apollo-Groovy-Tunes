@@ -10,7 +10,7 @@ client.login();
 // added to the String object 
 String.prototype.toWordCase = function(){
 	return this.split(' ').map((i) => {
-		let [o, ...t] = i;
+		let [o, ...t] = i || ['', ''];
 		return o.toUpperCase().concat( t.join('') );
 	}).join(' ');
 }
