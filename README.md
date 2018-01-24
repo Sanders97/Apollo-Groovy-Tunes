@@ -1,6 +1,6 @@
 # Apollo-Groovy-Tunes
 
-[Project link](krosenk729.github.io/Apollo-Groovy-Tunes)
+[Project link](https://krosenk729.github.io/Apollo-Groovy-Tunes)
 
 ### Group Members 
 Katherine, Curtis, Amelia, Marsalis, David 
