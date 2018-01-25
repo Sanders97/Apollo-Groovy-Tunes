@@ -1,51 +1,91 @@
-/*
-Function to get AJAX results for a video
-Parameters: name a user searched on and title a user searched on
-*/
 //variable used to create unique ul element for for cards
 var cardCount = 0;
 
-$("#search-btn").click(function(e){
-	e.preventDefault();
-	executeSearch();
+
+/*
+Event Listeners
+// If a search title or artist is entered or missing value attempted 
+// to be entered, hide errors 
+// If user attempts to search, validate that artist AND title have been entered
+// if so, get lyrics and video
+// if not, show errors  
+*/
+$('#music-search-title').on('focus', function(){
+	$('.title-error').remove();
 });
 
-function getVideo(userSearchName, searchTitle){
-	
-		var q = userSearchName + " " + searchTitle + " Lyrics";
+$('#music-search-artist').on('focus', function(){
+	$('.artist-error').remove();
+});
 
-		addVideoCard(searchTitle); 
+$('#search-btn').on('click', function(e){
+	e.preventDefault();
+
+	let userArtistSearch = $('#music-search-artist').val().trim(),
+		userTitleSearch = $('#music-search-title').val().trim();
+
+	if( userArtistSearch && userTitleSearch ){
+		$('.error').remove();
+		getVideo(userArtistSearch,userTitleSearch);
+		getLyrics(userArtistSearch,userTitleSearch);
 		
-		// Run GET Request on API
-		$.get(
-			"https://www.googleapis.com/youtube/v3/search",{
-				part: 'snippet, id',
-				q: q,
-				type:'video',
-				maxResults: 4,
-				videoSyndicated: true,
-				videoEmbeddable: true,
-				videoLicense: 'creativeCommon',
-				key: 'AIzaSyBEw_OnLrWKAKGIzxb2ee5WtfnRR0md67Q'},
-				function(data){
-					
-					// Log Data
-					console.log(data);
-					
-					$.each(data.items, function(i, item){
-						// Get Output
-						var output = getOutput(item);
-						//set the new videos to the correct card
-						//by referencing the card Id created for the card
-						$('#card' + cardCount).append(output);
-						$('.card-videos').sortable({handle: '.video-title', placeholder: 'drop-zone'});
-						$('.card-videos').disableSelection();
-					});
-				}
-		);
+		$('#music-search-title, #music-search-artist').val('');
+
+	} else {
+		if( !userTitleSearch ){
+			$('#music-search-title').after('<p class="error title-error">* Title is required</p>');
+		}
+		if( !userArtistSearch ){
+			$('#music-search-artist').after('<p class="error title-error">* Artist is required</p>');
+		}
+	}
+
+});
+
+/*
+Get Video Function
+// When called, gets youtube video results and adds them to a card
+// adds card to the ui 
+*/
+function getVideo(userSearchName, searchTitle){
+	var q = userSearchName + " " + searchTitle + " Lyrics";
+
+	addVideoCard(searchTitle); 
+	
+	// Run GET Request on API
+	$.get(
+		"https://www.googleapis.com/youtube/v3/search",{
+			part: 'snippet, id',
+			q: q,
+			type:'video',
+			maxResults: 4,
+			videoSyndicated: true,
+			videoEmbeddable: true,
+			videoLicense: 'creativeCommon',
+			key: 'AIzaSyBEw_OnLrWKAKGIzxb2ee5WtfnRR0md67Q'},
+			function(data){
+				
+				// Log Data
+				console.log(data);
+				
+				$.each(data.items, function(i, item){
+					// Get Output
+					var output = getOutput(item);
+					//set the new videos to the correct card
+					//by referencing the card Id created for the card
+					$('#card' + cardCount).append(output);
+					$('.card-videos').sortable({handle: '.video-title', placeholder: 'drop-zone'});
+					$('.card-videos').disableSelection();
+				});
+			}
+	);
 }
 
-// Build Output
+/*
+Built Output Function
+// When called, creates a list item DOM element 
+// with classes to create a video content item  
+*/
 function getOutput(item){
 	var videoId = item.id.videoId;
 	var title = item.snippet.title;
@@ -99,33 +139,12 @@ function getLyrics(searchName, searchTitle ){
 		}    
 	  });
 }
-/*
-Function to react to user click
-// Checks that input exists 
-// Clears existing page body and clears input fields
-// Calls functions to execute ajax calls (which will append cards as promise results)
-// Adds search criteria to user's past search and to db for trending searches 
-*/
-
-function executeSearch(){
-	var userSearchName = $('#music-search-artist').val(),
-		userSearchTitle = $('#music-search-title').val();
-	
-	if( !userSearchName || !userSearchTitle ){
-		return ; // do not do anything if a field is blank
-	}
-	//$('.main-content').empty();
-	getVideo(userSearchName,userSearchTitle);
-
-	getLyrics(userSearchName,userSearchTitle);
-	
-	$('#music-search-title, #music-search-artist').val('');
-}
 
 
 /*
-Function to add a new card 
-Parameters: card heading, body content (html), link text and link source
+Add Video Card Function
+// Creates a card DOM element 
+// and appends it to the main content section 
 */
 
 function addVideoCard(cardHeading){

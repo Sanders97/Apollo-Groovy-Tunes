@@ -26,6 +26,7 @@ html, body {
     position: relative; }
     .search-bar .form-group .error {
       position: absolute;
+      color: #FF5252;
       top: 30px;
       left: 0;
       right: 0; }

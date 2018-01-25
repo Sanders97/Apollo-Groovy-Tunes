@@ -15,6 +15,7 @@
 <body>
 <div class="container-fluid">
 	<div class="row">
+		
 	<div class="search-bar col center">
 		<form>
 			<div class="form-group form-group-artist">
@@ -31,11 +32,17 @@
 	</div>
 	<div class="row">
 		<div class="side-bar col-12 col-md-3">
+
 			<section>
+				<iframe width="100%" height="auto" src=https://youtube.com/embed/E-GPNzi5TmU frameborder="3" allowfullscreen allow="autoplay"></iframe>
 				<h3>Out of Ideas?</h3>
 				<p>See what others have searched for</p>
 				<hr>
 				<div id="search-trends">
+				</div>
+				<p>Or try a top trend from last.fm</p>
+				<hr>
+				<div id="search-top">
 				</div>
 			</section>
 		</div>
@@ -51,36 +58,8 @@
 	<!-- Mongo Stitch -->
 	<script src="https://s3.amazonaws.com/stitch-sdks/js/library/v2/stable/stitch.min.js"></script>
 	<!-- Local JS -->
-	<!-- <script type="text/javascript" src="assets/scripts/app.js"></script>
+	<script type="text/javascript" src="assets/scripts/app.js"></script>
 	<script type="text/javascript" src="assets/scripts/mongodb.js"></script>
- -->
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('#music-search-title').on('focus', function(){
-			$('.title-error').remove();
-		});
-		$('#music-search-artist').on('focus', function(){
-			$('.artist-error').remove();
-		});
-		$('#search-btn').on('click', function(e){
-			e.preventDefault();
-			console.log('form submit');
-			let userArtistSearch = $('#music-search-artist').val().trim(),
-				userTitleSearch = $('#music-search-title').val().trim();
 
-			if( userTitleSearch && userArtistSearch ){
-				$('.error').remove();
-			} else {
-				if( !userTitleSearch ){
-					$('#music-search-title').after('<p class="error title-error">* Title is required</p>');
-				}
-				if( !userArtistSearch ){
-					$('#music-search-artist').after('<p class="error title-error">* Artist is required</p>');
-				}
-			}
-
-		});
-	});
-</script>
 </body>
 </html>

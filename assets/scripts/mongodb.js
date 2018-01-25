@@ -5,6 +5,24 @@ const client = new stitch.StitchClient('musicsearch-ojgsa'),
 	db = client.service('mongodb', 'mongodb-atlas').db('searchterms');
 client.login();
 
+// Function to show top songs 
+// When window loads
+$(document).ready(function(){
+	// $('.main-content').sortable({handle: '.card-header', placeholder: 'drop-zone' });
+	
+	getTopN();
+	getLastFM(5);
+
+	// Function to execute a search on "top song" click
+	// Adds a listener to the trending searches to execute
+	// a query when one is clicked 
+	$('#search-trends, #search-top').on('click', 'a', function(){
+		$('#music-search-artist').val( $(this).attr('data-artist') );
+		$('#music-search-title').val( $(this).attr('data-title') );
+		$('#search-btn').trigger('click');
+	});
+});
+
 
 // Method to create title-case strings
 // added to the String object 
@@ -53,31 +71,6 @@ function getTopN(n = 5){
 	});
 }
 
-
-// Function to show top songs 
-// When window loads
-$(document).ready(function(){
-	// $('.main-content').sortable({handle: '.card-header', placeholder: 'drop-zone' });
-	
-	getTopN();
-
-	let f = `<p>Or try a top trend from last.fm</p>
-		<hr>
-		<div id="search-top">
-		</div>`;
-	$('#search-trends').after(f);
-
-	getLastFM(5);
-
-	// Function to execute a search on "top song" click
-	// Adds a listener to the trending searches to execute
-	// a query when one is clicked 
-	$('#search-trends, #search-top').on('click', 'a', function(){
-		$('#music-search-artist').val( $(this).attr('data-artist') );
-		$('#music-search-title').val( $(this).attr('data-title') );
-		$('#search-btn').trigger('click');
-	});
-});
 
 // Function to store query to database
 // When a user conducts a search, the artist and title
