@@ -16,11 +16,17 @@
 <div class="container-fluid">
 	<div class="row">
 	<div class="search-bar col center">
-		<label for="music-search-artist">Artist Name:</label>
-		<input type="text" name="music-search-artist" id="music-search-artist" pattern="(\w|\s)+" required>
-		<label for="music-search-title">Song Title Name:</label>
-		<input type="text" name="music-search-title" id="music-search-title" pattern="(\w|\s)+" required>
-		<button id="search-btn" class="btn btn-info">Search</button>
+		<form>
+			<div class="form-group form-group-artist">
+				<label for="music-search-artist">Artist Name:</label>
+				<input type="text" name="music-search-artist" id="music-search-artist" pattern="(\w|\s)+" required>
+			</div>
+			<div class="form-group form-group-title">
+				<label for="music-search-title">Song Title Name:</label>
+				<input type="text" name="music-search-title" id="music-search-title" pattern="(\w|\s)+" required>
+			</div>
+			<button id="search-btn" class="btn btn-info" type="submit">Search</button>
+		</form>
 	</div>
 	</div>
 	<div class="row">
@@ -45,8 +51,36 @@
 	<!-- Mongo Stitch -->
 	<script src="https://s3.amazonaws.com/stitch-sdks/js/library/v2/stable/stitch.min.js"></script>
 	<!-- Local JS -->
-	<script type="text/javascript" src="assets/scripts/app.js"></script>
+	<!-- <script type="text/javascript" src="assets/scripts/app.js"></script>
 	<script type="text/javascript" src="assets/scripts/mongodb.js"></script>
+ -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#music-search-title').on('focus', function(){
+			$('.title-error').remove();
+		});
+		$('#music-search-artist').on('focus', function(){
+			$('.artist-error').remove();
+		});
+		$('#search-btn').on('click', function(e){
+			e.preventDefault();
+			console.log('form submit');
+			let userArtistSearch = $('#music-search-artist').val().trim(),
+				userTitleSearch = $('#music-search-title').val().trim();
 
+			if( userTitleSearch && userArtistSearch ){
+				$('.error').remove();
+			} else {
+				if( !userTitleSearch ){
+					$('#music-search-title').after('<p class="error title-error">* Title is required</p>');
+				}
+				if( !userArtistSearch ){
+					$('#music-search-artist').after('<p class="error title-error">* Artist is required</p>');
+				}
+			}
+
+		});
+	});
+</script>
 </body>
 </html>
