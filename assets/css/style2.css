@@ -1,0 +1,52 @@
+html, body {
+  color: #212121;
+  width: 100%; }
+
+.center {
+  text-align: center; }
+
+.search-bar {
+  padding: 2em;
+  background: #FFECB3;
+  border-bottom: 2px solid #ffc107; }
+
+.side-bar {
+  padding: .65em;
+  border-right: 2px solid #ffc107; }
+
+.card {
+  margin: 1em; }
+
+.btn-info {
+  outline: none !important;
+  box-shadow: none !important;
+  color: #212121;
+  background: none;
+  border: 2px solid #ffc107; }
+  .btn-info:hover {
+    color: #FFECB3;
+    background-color: #ffa000;
+    border-color: #ffa000; }
+  .btn-info:active {
+    text-transform: scale(0.9); }
+
+    .side-bar{
+  background-color: orange;
+}
+
+  .main-content{
+  background-color:  lightgrey;
+}
+
+  .search-bar{
+    background-color: navy
+  }
+
+  label{
+    color:white;
+  }
+
+  #search-btn{
+    color: white;
+  }
+/*# sourceMappingURL=styles.css.map */
