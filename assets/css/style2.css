@@ -49,4 +49,12 @@ html, body {
   #search-btn{
     color: white;
   }
+
+  input {
+    color: white;
+  }
+
+  a {
+    color: black;
+  }
 /*# sourceMappingURL=styles.css.map */
