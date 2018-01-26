@@ -8,8 +8,6 @@ client.login();
 // Function to show top songs 
 // When window loads
 $(document).ready(function(){
-	// $('.main-content').sortable({handle: '.card-header', placeholder: 'drop-zone' });
-	
 	getTopN();
 	getLastFM(5);
 
@@ -62,9 +60,11 @@ function getTopN(n = 5){
 	.then(function(data){
 		let t = $('<ol>');
 			for(let i of data){
-				i.frag = '<li><a href="#" data-title="' + i.title +'" data-artist="' + i.artist + '">';
-				i.frag += '<span>'+ i.title.toWordCase() + '</span> by <span>' + i.artist.toWordCase() + '</span></a></li>';
-				t.append(i.frag);
+				if( i.title && i.artist ){
+					i.frag = '<li><a href="#" data-title="' + i.title +'" data-artist="' + i.artist + '">';
+					i.frag += '<span>'+ i.title.toWordCase() + '</span> by <span>' + i.artist.toWordCase() + '</span></a></li>';
+					t.append(i.frag);
+				}
 			}
 
 		$('#search-trends').html(t);
@@ -78,6 +78,8 @@ function getTopN(n = 5){
 $('#search-btn').on('click', function(){
 	let userSearchArtist = $('#music-search-artist').val().trim().toLowerCase(),
 		userSearchTitle = $('#music-search-title').val().trim().toLowerCase();
+
+	if(!userSearchArtist || !userSearchTitle){ return ; }
 
 	db.collection('searchterms').updateOne(
 		{"title": userSearchTitle, "artist": userSearchArtist}, 
