@@ -25,6 +25,21 @@ html, body {
   padding: 2em;
   background: #FFECB3;
   border-bottom: 2px solid #ffc107; }
+  .search-bar .form-group {
+    display: inline;
+    position: relative; }
+    .search-bar .form-group .error {
+      position: absolute;
+      color: #FF5252;
+      top: 30px;
+      left: 0;
+      right: 0; }
+    @media screen and (max-width: 614px) {
+      .search-bar .form-group .error {
+        position: initial; } }
+  @media screen and (max-width: 725px) {
+    .search-bar .form-group {
+      display: block; } }
 
 .side-bar {
   padding: .65em;
