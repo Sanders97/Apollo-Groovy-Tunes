@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 	<!-- Local CSS -->
 	<link rel="stylesheet" type="text/css" href="assets/css/styles.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/style2.css">
+	<link rel="stylesheet" type="text/css" id="style2" href="">
 
 </head>
 <body>
@@ -44,6 +44,10 @@
 				<hr>
 				<div id="search-top">
 				</div>
+				<hr>
+			</section>
+			<section class="style-changer">
+				<a href="#" class="style-change">Change Styles</a>
 			</section>
 		</div>
 		<div class="main-content col-12 col-md-9">
@@ -60,6 +64,17 @@
 	<!-- Local JS -->
 	<script type="text/javascript" src="assets/scripts/app.js"></script>
 	<script type="text/javascript" src="assets/scripts/mongodb.js"></script>
+	<script type="text/javascript">
+		$('.style-change').on('click', function(){
+			console.log('hi');
+			var t = $('#style2').attr('href');
+			if( t ){
+				$('#style2').attr('href', '');
 
+			} else {
+				$('#style2').attr('href', 'assets/css/style2.css');
+			}
+		});
+	</script>
 </body>
 </html>
