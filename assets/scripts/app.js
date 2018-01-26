@@ -28,7 +28,6 @@ $('#search-btn').on('click', function (e) {
 		$('.error').remove();
 		getVideo(userArtistSearch, userTitleSearch);
 		getLyrics(userArtistSearch, userTitleSearch);
-		getAlbum(userArtistSearch, userTitleSearch);
 
 		$('#music-search-title, #music-search-artist').val('');
 
@@ -132,7 +131,7 @@ function getLyrics(searchName, searchTitle) {
 			var lyrics = (data.message.body.lyrics.lyrics_body).replace('******* This Lyrics is NOT for Commercial use *******', '').replace('(1409617446111)', '').replace(/\n/gm, '<br>');
 			$('#c-' + cardCount + ' .col-lhs').append('<h4>' + lyricsTitle + '</h4>');
 			$('#c-' + cardCount + ' .col-lhs').append('<p>' + lyrics + '</p>');
-
+			getAlbum(searchName, searchTitle);
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			console.log(jqXHR);
