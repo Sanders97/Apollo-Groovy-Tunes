@@ -75,7 +75,7 @@ function getVideo(userSearchName, searchTitle) {
 				var output = getOutput(item);
 				//set the new videos to the correct card
 				//by referencing the card Id created for the card
-				$('#card' + cardCount).append(output);
+				$('#c-' + cardCount + ' .col-rhs ul').append(output);
 				$('.card-videos').sortable({ handle: '.video-title', placeholder: 'drop-zone' });
 				$('.card-videos').disableSelection();
 			});
@@ -130,8 +130,8 @@ function getLyrics(searchName, searchTitle) {
 			console.log(data);
 			var lyricsTitle = searchTitle + " Lyrics";
 			var lyrics = (data.message.body.lyrics.lyrics_body).replace('******* This Lyrics is NOT for Commercial use *******', '').replace('(1409617446111)', '').replace(/\n/gm, '<br>');
-			$('#card' + cardCount).before('<h4>' + lyricsTitle + '</h4>');
-			$('#card' + cardCount).before('<div class="card-lyrics"><p>' + lyrics + '</p></div>');
+			$('#c-' + cardCount + ' .col-lhs').append('<h4>' + lyricsTitle + '</h4>');
+			$('#c-' + cardCount + ' .col-lhs').append('<p>' + lyrics + '</p>');
 
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
@@ -149,13 +149,9 @@ function getAlbum(searchName, searchTitle) {
 	$.ajax(`https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${key}&artist=${searchName}&track=${searchTitle}&format=json`)
 
 		.then(function (data) {
-
-			console.log(data);
-
+			console.log('album', data.track.album);
 			var albumCover = (data.track.album.image[3]["#text"]);
-
-			$('#card' + cardCount).before('<img src="' + albumCover + '">');
-
+			$('#c-' + cardCount + ' .col-lhs h4').after('<div class="cover-art"><img src="' + albumCover + '"></div>');
 		});
 }
 
@@ -172,12 +168,15 @@ function addVideoCard(cardHeading) {
 	//for videos and lyrics to the correct card body
 	cardCount++;
 
-	var v = '<div class="card">';
+	var v = '<div class="card" id="c-' + cardCount + '">';
 	v += '<div class="card-header">' + cardHeading + '</div>';
-	v += '<div class="card-body">'
-	v += '<ul class="card-videos" id="card' + cardCount + '">'
+	v += '<div class="card-body">';
+	v += '<div class="row">';
+	v += '<div class="col col-lhs"></div>';
+	v += '<div class="col col-rhs">';
+	v += '<ul class="card-videos" id="card' + cardCount + '"></ul>'
 	v += '</div>';
-	v += '</div>';
+	v += '</div></div><!--card-body--></div><!--card-header-->';
 
 	$('.main-content').prepend(v);
 
